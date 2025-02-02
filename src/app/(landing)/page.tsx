@@ -1,5 +1,8 @@
 import { Features } from "@/components/landing/features";
 import Hero from "@/components/landing/hero";
+import Pricing from "@/components/landing/pricing";
+import Testimonials from "@/components/landing/testimonials";
+import WhyCryptex from "@/components/landing/why";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +20,9 @@ const LandingPage = () => {
       />
       <Hero />
       <Features />
+      <WhyCryptex />
+      <Pricing />
+      <Testimonials />
     </div>
   );
 };

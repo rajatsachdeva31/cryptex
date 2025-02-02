@@ -157,25 +157,27 @@ const features = [
 
 export function Features() {
   return (
-      <Container delay={0.8}>
-        <div id="features" className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32">
-          <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
-            <SectionBadge title="Features" />
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-700 to-neutral-900 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
-              Hands-on Learning, <br /> Risk-Free
-            </h2>
-            <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
-              Practice building a diverse crypto portfolio. Track its
-              performance, analyze trends, and refine your strategies like a
-              pro.
-            </p>
-          </div>
-          <BentoGrid>
-            {features.map((feature, idx) => (
-              <BentoCard key={idx} {...feature} />
-            ))}
-          </BentoGrid>
+    <div
+      id="features"
+      className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32"
+    >
+      <Container>
+        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
+          <SectionBadge title="Features" />
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-700 to-neutral-900 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
+            Hands-on Learning, <br /> Risk-Free
+          </h2>
+          <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
+            Practice building a diverse crypto portfolio. Track its performance,
+            analyze trends, and refine your strategies like a pro.
+          </p>
         </div>
+        <BentoGrid>
+          {features.map((feature, idx) => (
+            <BentoCard key={idx} {...feature} />
+          ))}
+        </BentoGrid>
       </Container>
+    </div>
   );
 }

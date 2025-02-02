@@ -21,7 +21,7 @@ const Hero = () => {
                 <div className="w-1.5 h-1.5 rounded-full bg-primary flex items-center justify-center animate-ping">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary flex items-center justify-center animate-ping"></div>
                 </div>
-                <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent text-sm font-semibold">
+                <span className="bg-gradient-to-r from-blue-700 via-blue-300 to-blue-700 bg-[length:200%_100%] animate-background-shine bg-clip-text text-transparent text-sm font-semibold">
                   Learn for the Future
                 </span>
               </AnimatedShinyText>

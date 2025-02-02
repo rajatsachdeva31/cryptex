@@ -37,8 +37,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   pathColor = "gray",
   pathWidth = 2,
   pathOpacity = 0.2,
-  gradientStartColor = "#ffaa40",
-  gradientStopColor = "#9c40ff",
+  gradientStartColor = "#60a5fa",
+  gradientStopColor = "#1e40af",
   startXOffset = 0,
   startYOffset = 0,
   endXOffset = 0,
@@ -92,11 +92,9 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     };
 
     // Initialize ResizeObserver
-    const resizeObserver = new ResizeObserver((entries) => {
-      // For all entries, recalculate the path
-      for (let entry of entries) {
-        updatePath();
-      }
+    const resizeObserver = new ResizeObserver(() => {
+      // Recalculate the path whenever resize occurs
+      updatePath();
     });
 
     // Observe the container element
@@ -130,7 +128,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       className={cn(
         "pointer-events-none absolute left-0 top-0 transform-gpu stroke-2",
-        className,
+        className
       )}
       viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
     >
