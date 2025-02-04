@@ -4,6 +4,7 @@ import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import Icons from "../global/icons";
 
 interface Links {
   label: string;
@@ -89,7 +90,7 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden  md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[240px] flex-shrink-0",
+          "h-full px-4 py-4 hidden md:flex md:flex-col bg-light-background dark:bg-dark-background w-[240px] flex-shrink-0",
           className
         )}
         animate={{
@@ -115,13 +116,14 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-14 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-light-background dark:bg-dark-background w-full"
         )}
         {...props}
       >
-        <div className="flex justify-end z-20 w-full">
+        <div className="flex justify-between items-center z-20 w-full">
+          <span className="flex items-center font-semibold text-lg"><Icons.logo size={10} className="h-8 w-8" />cryptex</span>
           <IconMenu2
-            className="text-neutral-800 dark:text-neutral-200"
+            className="cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -136,15 +138,15 @@ export const MobileSidebar = ({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 p-10 z-[100] flex flex-col justify-between bg-light-background dark:bg-dark-background",
                 className
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
+                className="absolute right-5 top-5 z-50"
                 onClick={() => setOpen(!open)}
               >
-                <IconX />
+                <IconX className="cursor-pointer" />
               </div>
               {children}
             </motion.div>
@@ -181,7 +183,7 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className={cn("text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0", link.label == "Logout" ? "text-red-500" : "")}
       >
         {link.label}
       </motion.span>

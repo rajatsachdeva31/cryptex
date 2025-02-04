@@ -1,10 +1,12 @@
 "use client";
 
 import {
-  IconArrowLeft,
   IconBrandTabler,
+  IconChartBar,
+  IconNews,
   IconSettings,
-  IconUserBolt,
+  // IconUserBolt,
+  IconArrowBarToLeft,
 } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
@@ -19,19 +21,19 @@ const links = [
     icon: <IconBrandTabler className="h-5 w-5 flex-shrink-0" />,
   },
   {
-    label: "Profile",
-    href: "#",
-    icon: <IconUserBolt className="h-5 w-5 flex-shrink-0" />,
+    label: "Trade",
+    href: "/trade",
+    icon: <IconChartBar className="h-5 w-5 flex-shrink-0" />,
+  },
+  {
+    label: "News",
+    href: "/news",
+    icon: <IconNews className="h-5 w-5 flex-shrink-0" />,
   },
   {
     label: "Settings",
-    href: "#",
+    href: "/settings",
     icon: <IconSettings className="h-5 w-5 flex-shrink-0" />,
-  },
-  {
-    label: "Logout",
-    href: "/login",
-    icon: <IconArrowLeft className="h-5 w-5 flex-shrink-0" />,
   },
 ];
 
@@ -52,7 +54,7 @@ const SideBar = () => {
           <SidebarLink
             link={{
               label: "Carlos Martinez",
-              href: "#",
+              href: "/profile",
               icon: (
                 <Image
                   src="https://randomuser.me/api/portraits/men/1.jpg"
@@ -62,6 +64,14 @@ const SideBar = () => {
                   alt="Avatar"
                 />
               ),
+            }}
+          />
+          <SidebarLink
+            className="ml-1 text-red-500"
+            link={{
+              label: "Logout",
+              href: "/logout",
+              icon: <IconArrowBarToLeft className="h-5 w-5 flex-shrink-0" />,
             }}
           />
         </div>
