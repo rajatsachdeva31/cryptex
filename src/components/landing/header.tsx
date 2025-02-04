@@ -35,7 +35,7 @@ const Header = () => {
             <ThemeSwitcher />
             <div className="flex ml-2 gap-2">
               <Button variant={"secondary"} size={"sm"} className="text-sm">
-                Login
+                <Link href="/login">Login</Link>
               </Button>
             </div>
             <Button variant={"ghost"} size={"sm"} className="lg:hidden">

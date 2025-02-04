@@ -15,10 +15,10 @@ import { AnimatedBeamMultipleOutputDemo } from "../ui/animated-beam-multiple-out
 import { BentoCard, BentoGrid } from "../ui/bento-grid";
 import { Marquee } from "../ui/marquee";
 import Container from "../global/container";
-import SectionBadge from "../ui/section-badge";
 import { AnimatedList } from "../ui/animated-list";
 import Notification from "../ui/notification";
 import { Calendar } from "../ui/calendar";
+import SectionHeader from "../ui/section-header";
 
 const learningModules = [
   {
@@ -161,17 +161,14 @@ export function Features() {
       id="features"
       className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32"
     >
+      <SectionHeader
+        badge="Features"
+        title1="Hands-on Learning,"
+        title2="Risk-Free"
+        description="Practice building a diverse crypto portfolio. Track its performance,
+          analyze trends, and refine your strategies like a pro."
+      />
       <Container>
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
-          <SectionBadge title="Features" />
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-700 to-neutral-900 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
-            Hands-on Learning, <br /> Risk-Free
-          </h2>
-          <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
-            Practice building a diverse crypto portfolio. Track its performance,
-            analyze trends, and refine your strategies like a pro.
-          </p>
-        </div>
         <BentoGrid>
           {features.map((feature, idx) => (
             <BentoCard key={idx} {...feature} />

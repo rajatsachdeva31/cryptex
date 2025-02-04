@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} antialiased overscroll-none overscroll-y-none`}
+        className={`${montserrat.variable} antialiased min-h-screen overscroll-none`}
       >
         <ThemeProvider
           attribute="class"

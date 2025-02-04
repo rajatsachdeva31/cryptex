@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "../global/container";
-import SectionBadge from "../ui/section-badge";
 import {
   Zap,
   BarChart3,
@@ -11,6 +10,7 @@ import {
   LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SectionHeader from "../ui/section-header";
 
 type PerkProps = {
   icon: LucideIcon;
@@ -64,19 +64,14 @@ const WhyCryptex = () => {
       id="whyCryptex"
       className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32"
     >
-      <Container>
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
-          <SectionBadge title="Why Cryptex?" />
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-700 to-neutral-900 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
-            Master Crypto Investing, <br /> The Smart Way
-          </h2>
-          <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
-            Build and manage a simulated crypto portfolio without the risk of
+      <SectionHeader
+        badge="Why Cryptex?"
+        title1="Master Crypto Investing,"
+        title2="The Smart Way"
+        description="Build and manage a simulated crypto portfolio without the risk of
             real-world losses. Analyze live market trends and fine-tune your
-            strategies as you learn by doing.
-          </p>
-        </div>
-      </Container>
+            strategies as you learn by doing."
+      />
       <Container>
         <div className="w-full mt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -113,9 +108,7 @@ const Perk = ({ icon: Icon, title, description, index }: PerkProps) => {
             {title}
           </span>
         </div>
-        <p className="text-sm max-w-md relative z-10 px-10">
-          {description}
-        </p>
+        <p className="text-sm max-w-md relative z-10 px-10">{description}</p>
       </div>
     </div>
   );

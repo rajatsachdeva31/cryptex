@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 const LandingPage = () => {
   return (
-    <div className="size-full h-full w-full mx-auto relative">
+    <div className="w-full mx-auto relative">
       <GridPattern
         width={85}
         height={85}

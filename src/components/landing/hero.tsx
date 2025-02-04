@@ -4,6 +4,7 @@ import { AnimatedShinyText } from "../ui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Container from "@/components/global/container";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -40,7 +41,9 @@ const Hero = () => {
         </Container>
         <Container delay={0.6}>
           <InteractiveHoverButton className="mt-10">
+            <Link href="/signup">
             Start for Free
+            </Link>
           </InteractiveHoverButton>
         </Container>
       </div>

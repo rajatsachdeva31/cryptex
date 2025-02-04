@@ -1,10 +1,10 @@
 import React from "react";
 import Container from "../global/container";
-import SectionBadge from "../ui/section-badge";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import SectionHeader from "../ui/section-header";
 
 type plan = {
   id: string;
@@ -62,19 +62,14 @@ const Pricing = () => {
       id="pricing"
       className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32"
     >
-      <Container>
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-20">
-          <SectionBadge title="Pricing" />
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-medium !leading-snug mt-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-700 to-neutral-900 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
-            Flexible Pricing, <br /> For Every Investor
-          </h2>
-          <p className="text-base md:text-lg text-center text-accent-foreground/80 mt-6">
-            Choose the plan that fits your learning journey. Whether you&apos;re
+      <SectionHeader
+        badge="Pricing"
+        title1="Flexible Pricing,"
+        title2="For Every Investor"
+        description="Choose the plan that fits your learning journey. Whether you're
             exploring crypto or building an advanced strategy, Cryptex has you
-            covered—risk-free.
-          </p>
-        </div>
-      </Container>
+            covered—risk-free."
+      />
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-14 md:px-40">
           {plans.map((plan, index) => (
