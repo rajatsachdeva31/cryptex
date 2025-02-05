@@ -3,7 +3,7 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <Container className="mt-2 h-full flex flex-col gap-4 overflow-y-scroll">
+    <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
       <h1 className="font-medium md:text-xl">Dashboard</h1>
       <Container delay={0.4} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((i) => (
