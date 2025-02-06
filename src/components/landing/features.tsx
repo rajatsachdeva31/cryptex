@@ -159,7 +159,7 @@ export function Features() {
   return (
     <div
       id="features"
-      className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-32"
+      className="p-4 max-w-7xl mx-auto flex-col items-center justify-center pt-20 md:pt-32"
     >
       <SectionHeader
         badge="Features"

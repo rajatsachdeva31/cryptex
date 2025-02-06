@@ -18,8 +18,10 @@ const Login = () => {
             <Icons.logo className="h-12 w-auto" />
           </Link>
         </div>
-        <h1 className="mt-2 text-2xl">Login to Cryptex</h1>
-        <p className="mt-1 text-base text-neutral-500 dark:text-neutral-400">Start your journey into crypto.</p>
+        <h1 className="pt-2 text-2xl">Login to Cryptex</h1>
+        <p className="pt-1 text-base text-neutral-500 dark:text-neutral-400">
+          Continue your journey into crypto.
+        </p>
       </motion.div>
       <motion.div
         className="w-full flex flex-col max-w-xs gap-3 py-6"
@@ -35,7 +37,16 @@ const Login = () => {
           <Icons.apple size={12} className="w-auto" />
           Continue with Apple
         </Button>
-        <p className="pt-4">Don&apos;t have an account? <Link className="font-semibold" href="/signup">Sign up</Link></p>
+        <Button size={"lg"} variant={"secondary"} type="button">
+          <Icons.coinbase size={12} className="w-auto" />
+          Continue with Coinbase
+        </Button>
+        <p className="pt-4">
+          Don&apos;t have an account?{" "}
+          <Link className="font-semibold" href="/signup">
+            Sign up
+          </Link>
+        </p>
       </motion.div>
     </div>
   );

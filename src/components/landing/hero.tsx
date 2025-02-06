@@ -11,7 +11,7 @@ const Hero = () => {
     <div className="w-full rounded-md flex md:items-center md:justify-center antialiased bg-grid relative overflow-hidden pt-20">
       <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="gray" />
       <div className=" p-4 max-w-7xl mx-auto relative z-10 w-full pt-10 md:pt-0 flex-col text-center">
-        <Container>
+        <Container className="max-h-fit">
           <div className="z-10 flex md:mt-12 min-h-36 items-center justify-center">
             <div
               className={cn(
@@ -29,7 +29,7 @@ const Hero = () => {
             </div>
           </div>
         </Container>
-        <Container delay={0.4}>
+        <Container className="max-h-fit" delay={0.4}>
           <h1 className="text-4xl md:text-7xl md:leading-tight font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-500 to-neutral-800 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50">
             The Smarter Way <br /> to Learn Crypto Investment.
           </h1>

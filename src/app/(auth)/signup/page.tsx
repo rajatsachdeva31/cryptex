@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FADE_IN_VARIANTS } from "@/components/global/animation";
 
 const Signup = () => {
+  
   return (
     <div className="flex flex-col justify-center items-center text-center w-full h-full">
       <motion.div
@@ -18,8 +19,8 @@ const Signup = () => {
             <Icons.logo className="h-12 w-auto" />
           </Link>
         </div>
-        <h1 className="mt-2 text-2xl">Sign Up for Cryptex</h1>
-        <p className="mt-1 text-base text-neutral-500 dark:text-neutral-400">
+        <h1 className="pt-2 text-2xl">Sign Up for Cryptex</h1>
+        <p className="pt-1 text-base text-neutral-500 dark:text-neutral-400">
           Join today and start learning crypto.
         </p>
       </motion.div>
@@ -36,6 +37,10 @@ const Signup = () => {
         <Button size={"lg"} variant={"secondary"} type="button">
           <Icons.apple size={12} className="w-auto" />
           Continue with Apple
+        </Button>
+        <Button size={"lg"} variant={"secondary"} type="button">
+          <Icons.coinbase size={12} className="w-auto" />
+          Continue with Coinbase
         </Button>
         <p className="pt-4">
           Already have an account?{" "}

@@ -4,7 +4,7 @@ import { RetroGrid } from "../ui/retro-grid";
 const Footer = () => {
   return (
     <Container>
-      <div className="my-10 relative flex h-[500px] w-full max-w-5xl mx-auto flex-col items-center justify-center overflow-hidden pt-32">
+      <div className="my-10 relative flex h-[500px] w-full max-w-5xl mx-auto flex-col items-center justify-center overflow-hidden pt-20 md:pt-32">
         <h1 className="text-4xl md:text-7xl md:leading-tight font-semibold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-600 to-neutral-950 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50 z-50">
           Elevate your <br />
           experience with us
