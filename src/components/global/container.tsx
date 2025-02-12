@@ -25,7 +25,6 @@ const Container = ({
       initial={{ opacity: 0, y: reverse ? -20 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false }}
-      // animate={{ opacity: 1, y: 0 }}
       transition={{
         delay: delay,
         duration: 0.6,
