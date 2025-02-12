@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -9,7 +8,10 @@ const nextConfig: NextConfig = {
         hostname: "randomuser.me"
       }
     ]
-  }
+  },
+  serverActions: {
+    allowedOrigins: ['my-proxy.com', '*.my-proxy.com'],
+  },
 };
 
 export default nextConfig;

@@ -12,12 +12,12 @@ const LandingPage = () => {
   return (
     <div className="w-full mx-auto relative">
       <GridPattern
-        width={85}
-        height={85}
+        width={75}
+        height={75}
         x={-1}
         y={-1}
         className={cn(
-          "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] "
+          "[mask-image:linear-gradient(to_bottom_right,gray,transparent,transparent)] "
         )}
       />
       <Hero />

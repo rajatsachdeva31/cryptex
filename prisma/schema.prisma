@@ -20,11 +20,11 @@ enum UserType {
 }
 
 model User {
-  id           String   @id
-  email        String   @unique
-  name         String?
-  profileImage String?
-  type         UserType @default(FREE)
-  balance      Int?
-  createdAt    DateTime @default(now())
+  id        String   @id
+  email     String   @unique
+  name      String?
+  avatar    String?
+  type      UserType @default(FREE)
+  balance   Int?
+  createdAt DateTime @default(now())
 }
