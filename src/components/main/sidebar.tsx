@@ -41,15 +41,16 @@ const links = [
 const SideBar = () => {
   const [open, setOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState<User>();
+  const [userData, setUserData] = useState<User | null>(null);
 
   async function getUserDetails() {
     try {
       const response = await GetUserDetails();
-      await setUserData(response);
-      await setIsLoaded(true);
+      setUserData(response);
+      setIsLoaded(true);
     } catch (error) {
       console.error(error);
+      setUserData(null);
     }
   }
 
@@ -72,11 +73,11 @@ const SideBar = () => {
           {isLoaded && (
             <SidebarLink
               link={{
-                label: userData ? userData.name : "User",
+                label: userData?.name ? userData.name : "User",
                 href: "/profile",
                 icon: (
                   <Image
-                    src={userData ? userData.avatar : ""}
+                    src={userData?.avatar ? userData.avatar : ""}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}

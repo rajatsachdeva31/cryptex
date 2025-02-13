@@ -9,15 +9,16 @@ import React, { Suspense, useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState<User>();
+  const [userData, setUserData] = useState<User | null>(null);
 
   async function getUserDetails() {
     try {
       const response = await GetUserDetails();
-      await setUserData(response);
-      await setIsLoaded(true);
+      setUserData(response);
+      setIsLoaded(true);
     } catch (error) {
       console.error(error);
+      setUserData(null);
     }
   }
 
@@ -28,7 +29,10 @@ const Dashboard = () => {
   return (
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
       <h1 className="font-medium md:text-xl">Dashboard</h1>
-      <Container delay={0.4} className="h-fit grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <Container
+        delay={0.4}
+        className="h-fit grid grid-cols-2 lg:grid-cols-4 gap-4"
+      >
         <Suspense
           fallback={[1, 2, 3, 4].map((i) => (
             <div
@@ -67,7 +71,7 @@ const Dashboard = () => {
             loaded={isLoaded}
             icon={<DollarSign className="text-red-500" />}
             title={"Available Balance"}
-            value={`$ ${String(userData?.balance)}`}
+            value={`$ ${userData?.balance ?? 0}`}
           />
         </Suspense>
       </Container>
