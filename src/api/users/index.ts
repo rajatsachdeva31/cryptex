@@ -12,7 +12,7 @@ export async function GetUserDetails() {
 
     return await prisma.user.findUnique({
         where: {
-            id: user.id,
+            clerkId: user.id,
         },
     })
 }

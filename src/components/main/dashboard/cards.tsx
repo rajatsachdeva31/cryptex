@@ -1,9 +1,37 @@
-import React from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import React from "react";
 
-const StatsCard = () => {
-  return (
-    <div>StatsCard</div>
-  )
+interface StatsCardsProps {
+  className: string;
+  loaded: boolean;
+  icon: React.ReactNode;
+  title: string;
+  value: string;
 }
 
-export default StatsCard
+const StatsCard = ({
+  className,
+  loaded,
+  icon: Icon,
+  title,
+  value,
+}: StatsCardsProps) => {
+  return (
+    <Card
+      className={`w-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md ${className}`}
+    >
+      <CardHeader>
+        <CardTitle className="flex items-center justify-between gap-2 font-medium md:text-lg lg:text-xl">
+          {title}
+          {Icon}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="text-xl md:text-3xl font-semibold">
+        {loaded ? value : <Skeleton className="h-7 md:h-8 w-1/3" />}
+      </CardContent>
+    </Card>
+  );
+};
+
+export default StatsCard;

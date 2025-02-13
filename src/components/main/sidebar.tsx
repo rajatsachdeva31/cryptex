@@ -13,6 +13,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 import Icons from "../global/icons";
 import { GetUserDetails } from "@/api/users";
+import { User } from "@/types/user";
 
 const links = [
   {
@@ -39,11 +40,14 @@ const links = [
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [userData, setUserData] = useState<User>();
 
   async function getUserDetails() {
     try {
-      const userData = await GetUserDetails();
-      console.log(userData);
+      const response = await GetUserDetails();
+      await setUserData(response);
+      await setIsLoaded(true);
     } catch (error) {
       console.error(error);
     }
@@ -65,21 +69,23 @@ const SideBar = () => {
           </div>
         </div>
         <div>
-          <SidebarLink
-            link={{
-              label: "Carlos Martinez",
-              href: "/profile",
-              icon: (
-                <Image
-                  src="https://randomuser.me/api/portraits/men/1.jpg"
-                  className="h-7 w-7 flex-shrink-0 rounded-full"
-                  width={50}
-                  height={50}
-                  alt="Avatar"
-                />
-              ),
-            }}
-          />
+          {isLoaded && (
+            <SidebarLink
+              link={{
+                label: userData ? userData.name : "User",
+                href: "/profile",
+                icon: (
+                  <Image
+                    src={userData ? userData.avatar : ""}
+                    className="h-7 w-7 flex-shrink-0 rounded-full"
+                    width={50}
+                    height={50}
+                    alt="Avatar"
+                  />
+                ),
+              }}
+            />
+          )}
           <SidebarLink
             className="ml-1 text-red-500"
             link={{

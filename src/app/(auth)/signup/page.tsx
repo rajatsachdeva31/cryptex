@@ -9,6 +9,7 @@ import { FADE_IN_VARIANTS } from "@/components/global/animation";
 import { OAuthStrategy } from "@clerk/types";
 import { useSignUp } from "@clerk/nextjs";
 import { LoaderCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Signup = () => {
   const [isGoogleLoading, setIsGoogleLoading] = React.useState(false);
@@ -16,6 +17,7 @@ const Signup = () => {
   const [isCoinbaseLoading, setIsCoinbaseLoading] = React.useState(false);
 
   const { isLoaded, signUp } = useSignUp();
+  const { toast } = useToast();
 
   const handleOAuth = async (strategy: OAuthStrategy) => {
     if (!isLoaded) return;
@@ -29,6 +31,17 @@ const Signup = () => {
     }
 
     try {
+      toast({
+        title: `Redirecting to ${
+          strategy === "oauth_google"
+            ? "Google"
+            : strategy === "oauth_apple"
+            ? "Apple"
+            : "Coinbase"
+        }`,
+        description:
+          "Please wait while we redirect you to the authentication page",
+      });
       await signUp?.authenticateWithRedirect({
         strategy,
         redirectUrl: "/sso",

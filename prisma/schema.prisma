@@ -20,11 +20,25 @@ enum UserType {
 }
 
 model User {
-  id        String   @id
-  email     String   @unique
+  id        String      @id @default(uuid())
+  clerkId   String      @unique
+  email     String      @unique
   name      String?
   avatar    String?
-  type      UserType @default(FREE)
-  balance   Int?
-  createdAt DateTime @default(now())
+  type      UserType    @default(FREE)
+  balance   Int?        @default(10000)
+  createdAt DateTime    @default(now())
+  Portfolio Portfolio[]
+}
+
+model Portfolio {
+  id            Int      @id @default(autoincrement())
+  userId        String
+  user          User     @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+  symbol        String
+  quantity      Float
+  purchasePrice Float
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, symbol])
 }

@@ -14,12 +14,7 @@ const AuthCallback = async () => {
   const existingUser = await GetUserById();
 
   if (!existingUser) {
-    CreateUser(
-      user.id,
-      user.fullName ? user.fullName : "",
-      user.emailAddresses[0].emailAddress,
-      user.imageUrl
-    );
+    CreateUser();
   }
 
   redirect("/dashboard");
