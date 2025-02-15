@@ -14,6 +14,7 @@ import * as motion from "motion/react-client";
 import Icons from "../global/icons";
 import { GetUserDetails } from "@/api/users";
 import { User } from "@/types/user";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 const links = [
   {
@@ -70,6 +71,7 @@ const SideBar = () => {
           </div>
         </div>
         <div>
+          <ThemeSwitcher className="w-7" />
           {isLoaded && (
             <SidebarLink
               link={{
