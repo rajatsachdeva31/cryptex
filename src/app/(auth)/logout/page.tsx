@@ -17,7 +17,8 @@ const Logout = () => {
   return (
     <Container className="flex justify-center gap-2 py-10">
       <LoaderCircle className="animate-spin" />
-      <h1 className="text-xl font-medium">Redirecting to login page...</h1>
+      <h1 className="text-xl font-medium">Redirecting to home page...</h1>
+      <h2 className="text-xl">See you next time!</h2>
     </Container>
   );
 };

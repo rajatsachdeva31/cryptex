@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
+import PortfolioTable from "./table";
 
 interface StatsCardsProps {
   className: string;
@@ -28,7 +29,7 @@ const StatsCard = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="text-xl md:text-3xl font-semibold">
-        {loaded ? value : <Skeleton className="h-7 md:h-8 w-1/3" />}
+        {loaded ? value : <Skeleton className="h-7 md:h-10 w-1/3" />}
       </CardContent>
     </Card>
   );
@@ -55,9 +56,12 @@ const PortfolioCard = () => {
     >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between gap-2 font-medium md:text-lg lg:text-xl">
-          Portfolio
+          Current Holdings
         </CardTitle>
       </CardHeader>
+      <CardContent>
+        <PortfolioTable />
+      </CardContent>
     </Card>
   );
 };

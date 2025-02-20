@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/providers";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -38,22 +37,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${montserrat.variable} antialiased min-h-screen overscroll-none`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${montserrat.variable} antialiased min-h-screen overscroll-none`}
+      >
+        <Providers>
+          {children}
           <Toaster />
-        </body>
-      </html>
-    </ClerkProvider>
+        </Providers>
+      </body>
+    </html>
   );
 }

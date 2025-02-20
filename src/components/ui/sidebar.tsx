@@ -5,6 +5,7 @@ import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import Icons from "../global/icons";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 interface Links {
   label: string;
@@ -121,11 +122,17 @@ export const MobileSidebar = ({
         {...props}
       >
         <div className="flex justify-between items-center z-20 w-full">
-          <span className="flex items-center font-semibold text-lg"><Icons.logo size={10} className="h-8 w-8" />cryptex</span>
-          <IconMenu2
-            className="cursor-pointer"
-            onClick={() => setOpen(!open)}
-          />
+          <span className="flex items-center font-semibold text-lg">
+            <Icons.logo size={10} className="h-8 w-8" />
+            cryptex
+          </span>
+          <div className="flex items-center gap-2">
+            <ThemeSwitcher className="w-7" />
+            <IconMenu2
+              className="cursor-pointer"
+              onClick={() => setOpen(!open)}
+            />
+          </div>
         </div>
         <AnimatePresence>
           {open && (
@@ -184,7 +191,10 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className={cn("text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0", link.label == "Logout" ? "text-red-500" : "")}
+        className={cn(
+          "text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0",
+          link.label == "Logout" ? "text-red-500" : ""
+        )}
       >
         {link.label}
       </motion.span>

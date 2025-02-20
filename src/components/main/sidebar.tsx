@@ -7,14 +7,13 @@ import {
   IconSettings,
   IconArrowBarToLeft,
 } from "@tabler/icons-react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 import Icons from "../global/icons";
-import { GetUserDetails } from "@/api/users";
-import { User } from "@/types/user";
 import { ThemeSwitcher } from "../ThemeSwitcher";
+import { UserContext } from "@/contexts/UserContext";
 
 const links = [
   {
@@ -41,23 +40,7 @@ const links = [
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState<User | null>(null);
-
-  async function getUserDetails() {
-    try {
-      const response = await GetUserDetails();
-      setUserData(response);
-      setIsLoaded(true);
-    } catch (error) {
-      console.error(error);
-      setUserData(null);
-    }
-  }
-
-  useEffect(() => {
-    getUserDetails();
-  }, []);
+  const { user, isLoaded } = useContext(UserContext);
 
   return (
     <Sidebar open={open} setOpen={setOpen}>
@@ -75,11 +58,11 @@ const SideBar = () => {
           {isLoaded && (
             <SidebarLink
               link={{
-                label: userData?.name ? userData.name : "User",
+                label: user?.name ? user.name : "User",
                 href: "/profile",
                 icon: (
                   <Image
-                    src={userData?.avatar ? userData.avatar : ""}
+                    src={user?.avatar ? user.avatar : ""}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}
