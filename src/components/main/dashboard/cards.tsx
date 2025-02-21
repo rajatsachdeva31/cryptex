@@ -52,14 +52,14 @@ const ChartCard = () => {
 const PortfolioCard = () => {
   return (
     <Card
-      className={`w-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md dark:border-neutral-700`}
+      className={`w-full h-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md dark:border-neutral-700`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between gap-2 font-medium md:text-lg lg:text-xl">
           Current Holdings
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="h-full">
         <PortfolioTable />
       </CardContent>
     </Card>

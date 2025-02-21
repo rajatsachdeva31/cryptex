@@ -24,7 +24,7 @@ const Dashboard = () => {
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
       <div className="flex justify-between items-center">
         <h1 className="font-medium md:text-xl">Dashboard</h1>
-        {user?.type == "FREE" && (
+        {isLoaded && user?.type == "FREE" && (
           <Button variant={"ghost"} className="flex items-center gap-1">
             <Zap fill="#facc15" size={20} color="#facc15" />
             Upgrade

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,7 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { UserContext } from "@/contexts/UserContext";
 import { cn } from "@/lib/utils";
+import { useContext } from "react";
 
 const portfolio = [
   {
@@ -63,41 +67,51 @@ const portfolio = [
 ];
 
 const PortfolioTable = () => {
+  const { user, isLoaded } = useContext(UserContext);
   return (
-    <Table>
-      <TableCaption></TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Symbol</TableHead>
-          <TableHead>Quantity</TableHead>
-          <TableHead>Cost</TableHead>
-          <TableHead className="text-right">Profit/Loss</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {portfolio.map((holding) => (
-          <TableRow key={holding.symbol}>
-            <TableCell className="font-medium">{holding.symbol}</TableCell>
-            <TableCell>{holding.quantity}</TableCell>
-            <TableCell>${holding.purchasePrice}</TableCell>
-            <TableCell
-              className={cn(
-                "text-right",
-                holding.profitLoss > 0 ? "text-green-500" : "text-red-500"
-              )}
-            >
-              {holding.profitLoss.toFixed(2)}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+    <>
+      {isLoaded && !user?.Portfolio && (
+        <div className="h-full w-full flex items-center justify-center">
+          Start trading to view your portfolio
+        </div>
+      )}
+      {isLoaded && user?.Portfolio && (
+        <Table>
+          <TableCaption></TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Symbol</TableHead>
+              <TableHead>Quantity</TableHead>
+              <TableHead>Cost</TableHead>
+              <TableHead className="text-right">Profit/Loss</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {portfolio.map((holding) => (
+              <TableRow key={holding.symbol}>
+                <TableCell className="font-medium">{holding.symbol}</TableCell>
+                <TableCell>{holding.quantity}</TableCell>
+                <TableCell>${holding.purchasePrice}</TableCell>
+                <TableCell
+                  className={cn(
+                    "text-right",
+                    holding.profitLoss > 0 ? "text-green-500" : "text-red-500"
+                  )}
+                >
+                  {holding.profitLoss.toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell className="text-right">$2,500.00</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      )}
+    </>
   );
 };
 
