@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@/components/global/container";
 import {
   ChartCard,
@@ -15,10 +15,27 @@ import {
   Wallet,
   Zap,
 } from "lucide-react";
-import { UserContext } from "@/contexts/UserContext";
+import { User } from "@/types/user";
+import { GetUserDetails } from "@/api/users";
 
 const Dashboard = () => {
-  const { user, isLoaded } = useContext(UserContext);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  async function getUserDetails() {
+    try {
+      const response = await GetUserDetails();
+      setUser(response);
+      setIsLoaded(true);
+    } catch (error) {
+      console.error(error);
+      setUser(null);
+    }
+  }
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
 
   return (
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
@@ -41,9 +58,13 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<Wallet className="text-primary" />}
           title={"Portfolio Value"}
-          value={`$ ${(15320.74)
-            .toFixed(2)
-            .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`}
+          value={
+            isLoaded && !user?.Portfolio
+              ? "-"
+              : `$ ${(15320.74)
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`
+          }
         />
         <StatsCard
           className=""
@@ -51,7 +72,7 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<ChartNoAxesCombined className="text-primary" />}
           title={"Total Profit/Loss"}
-          value={`${String(+6.42)} %`}
+          value={isLoaded && !user?.Portfolio ? "-" : `${String(+6.42)} %`}
         />
         <StatsCard
           className=""
@@ -59,7 +80,7 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<LucideHandCoins className="text-primary" />}
           title={"Top Asset"}
-          value={`ETH (${String(+8.5)} %)`}
+          value={isLoaded && !user?.Portfolio ? "-" : `ETH (${String(+8.5)} %)`}
         />
         <StatsCard
           className=""

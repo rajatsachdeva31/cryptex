@@ -47,7 +47,7 @@ const News = () => {
       <div className="flex flex-wrap h-fit relative lg:pb-10">
         {loading &&
           [1, 2, 3].map((s) => (
-            <div className="p-2 w-1/2" key={s}>
+            <div className="w-full h-fit xl:w-1/2 p-2" key={s}>
               {" "}
               <Skeleton className="h-64" />
             </div>

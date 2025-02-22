@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import PortfolioTable from "./table";
+import PerformanceChart from "./chart";
 
 interface StatsCardsProps {
   className: string;
@@ -38,13 +39,16 @@ const StatsCard = ({
 const ChartCard = () => {
   return (
     <Card
-      className={`w-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md dark:border-neutral-700`}
+      className={`w-full h-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md dark:border-neutral-700`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between gap-2 font-medium md:text-lg lg:text-xl">
           Performance Chart
         </CardTitle>
       </CardHeader>
+      <CardContent className="h-full">
+        <PerformanceChart />
+      </CardContent>
     </Card>
   );
 };

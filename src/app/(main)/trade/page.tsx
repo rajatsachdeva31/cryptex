@@ -1,7 +1,10 @@
 "use client";
 
 import Container from "@/components/global/container";
+import CoinDetails from "@/components/main/trade/details";
+import ListingTable from "@/components/main/trade/table";
 import { Button } from "@/components/ui/button";
+import { SelectedCoinProvider } from "@/contexts/SelectCoin";
 import { UserContext } from "@/contexts/UserContext";
 import { Zap } from "lucide-react";
 import React, { useContext } from "react";
@@ -20,6 +23,19 @@ const Trade = () => {
           </Button>
         )}
       </div>
+      <Container
+        delay={0.6}
+        className="h-full grid grid-cols-1 lg:grid-cols-3 gap-4 pb-2"
+      >
+        <SelectedCoinProvider>
+          <div className="col-span-1">
+            <ListingTable />
+          </div>
+          <div className="col-span-2">
+            <CoinDetails />
+          </div>
+        </SelectedCoinProvider>
+      </Container>
     </Container>
   );
 };

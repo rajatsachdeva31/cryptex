@@ -1,15 +1,37 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import * as motion from "motion/react-client";
 import { NavMenu } from "./menu";
 import Link from "next/link";
 import Icons from "../global/icons";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import { User } from "@/types/user";
+import { GetUserDetails } from "@/api/users";
 // import { Menu, XIcon } from "lucide-react";
 
 const Header = () => {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  async function getUserDetails() {
+    try {
+      const response = await GetUserDetails();
+      setUser(response);
+      setIsLoaded(true);
+    } catch (error) {
+      console.error(error);
+      setUser(null);
+    }
+  }
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
   return (
     <motion.header
       className="fixed top-4 inset-x-0 max-w-4xl px-4 lg:max-w-6xl mx-auto z-50 transform"
@@ -34,9 +56,22 @@ const Header = () => {
           <div className="flex items-center justify-end">
             <ThemeSwitcher />
             <div className="flex ml-2 gap-2">
-              <Button variant={"secondary"} size={"sm"} className="text-sm">
-                <Link href="/login">Login</Link>
-              </Button>
+              {isLoaded && !user && (
+                <Button variant={"secondary"} size={"sm"} className="text-sm">
+                  <Link href="/login">Login</Link>
+                </Button>
+              )}
+              {isLoaded && user && (
+                <Link className="mr-2" href="/dashboard">
+                  <Image
+                    src={user?.avatar ? user.avatar : ""}
+                    className="h-7 w-7 flex-shrink-0 rounded-full"
+                    width={50}
+                    height={50}
+                    alt="Avatar"
+                  />
+                </Link>
+              )}
             </div>
             {/* <Button variant={"ghost"} size={"sm"} className="lg:hidden">
               {isOpen ? (
