@@ -1,3 +1,8 @@
+"use server";
+
+import prisma from "@/lib/prisma";
+import { currentUser } from "@clerk/nextjs/server";
+
 export async function getChartData(selectedCoin: string) {
     const options = {
         method: "GET",
@@ -17,4 +22,21 @@ export async function getChartData(selectedCoin: string) {
     }
     const data = await response.json()
     return data
+}
+
+export async function tradeCoin(symbol: string, quantity: number, purchasePrice: number) {
+    const user = await currentUser()
+
+    if (!user || !user.emailAddresses?.length) {
+        return null;
+    }
+
+    return await prisma.portfolio.create({
+        data: {
+            userId: user.id,
+            symbol: symbol,
+            quantity: quantity,
+            purchasePrice: purchasePrice,
+        }
+    })
 }

@@ -2991,11 +2991,16 @@ const listing = [
 const ListingTable = () => {
   const { user, isLoaded } = useContext(UserContext) as UserContextType;
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
   const itemsPerPage = 10;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = listing.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = listing
+    .filter((coin) =>
+      coin.name.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(listing.length / itemsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
@@ -3012,12 +3017,12 @@ const ListingTable = () => {
   return (
     <>
       {isLoaded && user && (
-        <div className="w-full">
+        <div className="w-full md:px-1">
           <div className="flex items-center py-4">
             <Input
-              placeholder="Search"
-              value={""}
-              onChange={() => {}}
+              placeholder="Search by name..."
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
               className="max-w-sm"
             />
           </div>
@@ -3028,7 +3033,7 @@ const ListingTable = () => {
                   <TableHead>Symbol</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Price</TableHead>
-                  <TableHead className="text-right">Last 24 hours</TableHead>
+                  <TableHead className="text-right">Last 24hrs</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

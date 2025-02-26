@@ -4,9 +4,9 @@ import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 
 export async function GetUserDetails() {
-    const user = await currentUser();
+    const user = await currentUser()
 
-    if (!user) {
+    if (!user || !user.emailAddresses?.length) {
         return null;
     }
 
@@ -14,5 +14,24 @@ export async function GetUserDetails() {
         where: {
             clerkId: user.id,
         },
+    })
+}
+
+export async function UpdateBalance(amount: number) {
+    const user = await currentUser()
+
+    if (!user || !user.emailAddresses?.length) {
+        return null;
+    }
+
+    return await prisma.user.update({
+        where: {
+            clerkId: user.id,
+        },
+        data: {
+            balance: {
+                decrement: amount,
+            }
+        }
     })
 }
