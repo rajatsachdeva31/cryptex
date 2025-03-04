@@ -104,19 +104,22 @@ const CoinDetails = () => {
   };
 
   return (
-    <div className="w-full h-full p-2">
+    <div className="w-full h-full p-2 mt-5 md:mt-0">
       {selectedCoin && (
         <div>
           <h1 className="text-xl font-semibold flex justify-between items-center">
-            <p className="flex gap-1">
+            <p className="flex gap-2">
               <Image
+              className="h-full w-full"
                 alt={selectedCoin.id}
                 src={selectedCoin.image}
                 width={30}
                 height={20}
               />
-              <span>{selectedCoin.name}</span>
-              <span className="uppercase">({selectedCoin.symbol})</span>
+              <div className="flex flex-col md:flex-row">
+                <span>{selectedCoin.name}</span>
+                <span className="uppercase">({selectedCoin.symbol})</span>
+              </div>
             </p>
             <div className="flex flex-col items-end md:flex-row md:items-center gap-2">
               <p>
@@ -133,7 +136,7 @@ const CoinDetails = () => {
                     Trade
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="bg-white dark:bg-[#121212]">
                   <DialogHeader>
                     <DialogTitle>Buy {selectedCoin.name}</DialogTitle>
                     <DialogDescription>
@@ -197,7 +200,7 @@ const CoinDetails = () => {
               </LineChart>
             </ChartContainer>
           )}
-          <div className="grid grid-cols-2 md:grid-cols-3 mt-2 p-4">
+          <div className="grid grid-cols-3 md:grid-cols-3 mt-2 p-4">
             <h2 className="flex flex-col lg:flex-row lg:gap-2 items-center justify-center mt-8">
               24h High:{" "}
               <span className="font-medium text-xl">

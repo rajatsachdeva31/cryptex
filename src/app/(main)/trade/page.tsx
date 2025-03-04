@@ -25,7 +25,7 @@ const Trade = () => {
       </div>
       <Container
         delay={0.6}
-        className="h-full grid grid-cols-1 lg:grid-cols-3 gap-4 pb-2"
+        className="h-full grid grid-cols-1 lg:grid-cols-3 md:gap-4 pb-2"
       >
         <SelectedCoinProvider>
           <div className="col-span-1">

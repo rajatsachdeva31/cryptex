@@ -62,7 +62,7 @@ const Testimonials = () => {
             strategies and grew confident in building successful portfolios."
       />
       <Container>
-        <div className="relative flex flex-col items-center justify-center overflow-hidden mx-10">
+        <div className="relative flex flex-col items-center justify-center overflow-hidden md:mx-10">
           <Marquee pauseOnHover className="[--duration:20s]">
             {firstRow.map((review) => (
               <ReviewCard key={review.username} {...review} />
