@@ -14,6 +14,9 @@ export async function GetUserDetails() {
         where: {
             clerkId: user.id,
         },
+        include: {
+            Portfolio: true,
+        }
     })
 }
 

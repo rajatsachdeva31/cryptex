@@ -1,3 +1,8 @@
 export interface Portfolio {
-    id: string;
+    id: number;
+    userId: string;
+    symbol: string;
+    quantity: number;
+    purchasePrice: number;
+    createdAt: Date;
 }

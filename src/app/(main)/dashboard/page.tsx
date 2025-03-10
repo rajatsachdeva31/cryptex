@@ -17,25 +17,67 @@ import {
 } from "lucide-react";
 import { User } from "@/types/user";
 import { GetUserDetails } from "@/api/users";
+import { getCoinsList } from "@/api/trade/route";
+import { Coin } from "@/types/coin";
 
 const Dashboard = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-
-  async function getUserDetails() {
-    try {
-      const response = await GetUserDetails();
-      setUser(response);
-      setIsLoaded(true);
-    } catch (error) {
-      console.error(error);
-      setUser(null);
-    }
-  }
+  const [listing, setListing] = useState<Coin[]>([]);
 
   useEffect(() => {
+    const fetchListing = async () => {
+      const data = await getCoinsList();
+      setListing(data);
+    };
+    async function getUserDetails() {
+      try {
+        const response = await GetUserDetails();
+        setUser(response);
+        setIsLoaded(true);
+      } catch (error) {
+        console.error(error);
+        setUser(null);
+      }
+    }
     getUserDetails();
+    fetchListing();
   }, []);
+
+  const portfolioValue = () => {
+    if (user?.Portfolio && listing.length > 0) {
+      return user.Portfolio.reduce((total: number, holding) => {
+        const coin = listing.find((coin) => coin.id === holding.symbol);
+        if (coin) {
+          return total + holding.quantity * coin.current_price;
+        }
+        return total;
+      }, 0);
+    }
+    return 0;
+  };
+
+  const totalCost = () => {
+    if (user?.Portfolio && listing.length > 0) {
+      return user.Portfolio.reduce((total: number, holding) => {
+        const coin = listing.find((coin) => coin.id === holding.symbol);
+        if (coin) {
+          return total + holding.quantity * holding.purchasePrice;
+        }
+        return total;
+      }, 0);
+    }
+    return 0;
+  };
+
+  const profitLoss = () => {
+    const currentValue = portfolioValue();
+    const cost = totalCost();
+    console.log(currentValue);
+    if (cost === 0) return "0.00";
+    const profitLoss = ((currentValue - cost) / cost) * 100;
+    return profitLoss.toFixed(2);
+  };
 
   return (
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
@@ -58,13 +100,7 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<Wallet className="text-primary" />}
           title={"Portfolio Value"}
-          value={
-            isLoaded && !user?.Portfolio
-              ? "-"
-              : `$ ${(15320.74)
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`
-          }
+          value={isLoaded && !user?.Portfolio ? "-" : `$ ${String(portfolioValue().toFixed(2))}`}
         />
         <StatsCard
           className=""
@@ -72,7 +108,9 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<ChartNoAxesCombined className="text-primary" />}
           title={"Total Profit/Loss"}
-          value={isLoaded && !user?.Portfolio ? "-" : `${String(+6.42)} %`}
+          value={
+            isLoaded && !user?.Portfolio ? "-" : `${String(profitLoss())} %`
+          }
         />
         <StatsCard
           className=""

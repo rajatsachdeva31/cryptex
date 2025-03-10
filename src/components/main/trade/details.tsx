@@ -85,8 +85,12 @@ const CoinDetails = () => {
       setError("Please select a coin to trade.");
       return;
     }
+    const total = quantity * selectedCoin.current_price;
+    if (user.balance && total > user.balance) {
+      setError("Insufficient balance.");
+      return;
+    }
     try {
-      const total = quantity * selectedCoin.current_price;
       await tradeCoin(selectedCoin.id, quantity, selectedCoin.current_price);
       await UpdateBalance(total);
       toast({
@@ -110,7 +114,7 @@ const CoinDetails = () => {
           <h1 className="text-xl font-semibold flex justify-between items-center">
             <p className="flex gap-2">
               <Image
-              className="h-full w-full"
+                className="h-full md:h-fit w-full md:w-fit"
                 alt={selectedCoin.id}
                 src={selectedCoin.image}
                 width={30}
@@ -158,7 +162,9 @@ const CoinDetails = () => {
                     <p>
                       Total: $
                       {String(
-                        quantity ? selectedCoin.current_price * quantity : 0
+                        quantity
+                          ? (selectedCoin.current_price * quantity).toFixed(2)
+                          : 0
                       ).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                     </p>
                     <Button

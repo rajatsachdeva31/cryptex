@@ -9,7 +9,7 @@ export interface User {
     type: UserType;
     balance: number | null;
     createdAt: Date;
-    Portfolio?: Array<Portfolio>
+    Portfolio: Array<Portfolio>
 }
 
 export type UserType = "FREE" | "PRO";
