@@ -79,7 +79,7 @@ const PortfolioTable = () => {
                 </TableCell>
                 <TableCell>{holding.quantity}</TableCell>
                 <TableCell>
-                  ${holding.purchasePrice * holding.quantity}
+                  ${(holding.purchasePrice * holding.quantity).toFixed(2)}
                 </TableCell>
                 <TableCell>
                   $

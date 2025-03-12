@@ -38,3 +38,17 @@ export async function UpdateBalance(amount: number) {
         }
     })
 }
+
+export async function GetAllUsers() {
+    const user = await currentUser()
+
+    if (!user || !user.emailAddresses?.length) {
+        return null;
+    }
+
+    return await prisma.user.findMany({
+        include: {
+            Portfolio: true,
+        }
+    })
+}

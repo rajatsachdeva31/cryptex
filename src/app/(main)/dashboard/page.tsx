@@ -73,10 +73,39 @@ const Dashboard = () => {
   const profitLoss = () => {
     const currentValue = portfolioValue();
     const cost = totalCost();
-    console.log(currentValue);
-    if (cost === 0) return "0.00";
     const profitLoss = ((currentValue - cost) / cost) * 100;
     return profitLoss.toFixed(2);
+  };
+
+  const topAsset = () => {
+    if (user?.Portfolio && listing.length > 0) {
+      const assetsWithProfit = user.Portfolio.map((holding) => {
+        const coin = listing.find((coin) => coin.id === holding.symbol);
+        if (coin) {
+          const profit =
+            (coin.current_price - holding.purchasePrice) * holding.quantity;
+          const proftPercentage =
+            (profit / holding.purchasePrice) * holding.quantity * 100;
+          return {
+            symbol: coin.symbol.toUpperCase(),
+            profit,
+            proftPercentage,
+          };
+        }
+        return null;
+      }).filter((asset) => asset !== null);
+
+      const top = assetsWithProfit.reduce(
+        (max, asset) =>
+          !max || asset.proftPercentage > max.proftPercentage ? asset : max,
+        null
+      );
+
+      return top
+        ? `${top.symbol} (${top.proftPercentage.toFixed(2)}%)`
+        : "No assets";
+    }
+    return "No assets";
   };
 
   return (
@@ -100,7 +129,11 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<Wallet className="text-primary" />}
           title={"Portfolio Value"}
-          value={isLoaded && !user?.Portfolio ? "-" : `$ ${String(portfolioValue().toFixed(2))}`}
+          value={
+            isLoaded && !user?.Portfolio
+              ? "-"
+              : `$ ${String(portfolioValue().toFixed(2))}`
+          }
         />
         <StatsCard
           className=""
@@ -118,7 +151,7 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<LucideHandCoins className="text-primary" />}
           title={"Top Asset"}
-          value={isLoaded && !user?.Portfolio ? "-" : `ETH (${String(+8.5)} %)`}
+          value={isLoaded && !user?.Portfolio ? "-" : String(topAsset())}
         />
         <StatsCard
           className=""
