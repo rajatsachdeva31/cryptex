@@ -197,9 +197,9 @@ const CoinDetails = () => {
                 <YAxis domain={["dataMin", "dataMax"]} />
                 <Tooltip content={<ChartTooltipContent />} />
                 <Line
-                  type="monotone"
+                  type="linear"
                   dataKey="price"
-                  stroke="blue"
+                  stroke="#60a5fa"
                   strokeWidth={2}
                   dot={false}
                 />

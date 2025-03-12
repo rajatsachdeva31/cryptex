@@ -6,7 +6,7 @@ import Container from "@/components/global/container";
 import { User } from "@/types/user";
 import { Coin } from "@/types/coin";
 import React, { useEffect, useState } from "react";
-import LeaderboardCard from "@/components/leaderboard/card";
+import LeaderboardCard from "@/components/main/leaderboard/card";
 
 export interface UserWithProfit extends User {
   totalProfit: number;
