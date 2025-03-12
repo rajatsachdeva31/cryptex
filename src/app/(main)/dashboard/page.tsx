@@ -98,7 +98,7 @@ const Dashboard = () => {
       const top = assetsWithProfit.reduce(
         (max, asset) =>
           !max || asset.proftPercentage > max.proftPercentage ? asset : max,
-        null
+        assetsWithProfit[0]
       );
 
       return top
