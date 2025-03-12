@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "../global/container";
 import Image from "next/image";
 import { NewsItem } from "@/types/news";
 import Link from "next/link";
+import Container from "@/components/global/container";
 
 const NewsCard = ({ news }: { news: NewsItem }) => {
   return (

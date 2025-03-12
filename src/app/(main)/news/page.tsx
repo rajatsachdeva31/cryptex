@@ -8,7 +8,7 @@ import { UserContext } from "@/contexts/UserContext";
 import { fetchNews } from "@/api/news/route";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { Skeleton } from "@/components/ui/skeleton";
-import NewsCard from "@/components/news/card";
+import NewsCard from "@/components/main/news/card";
 import { NewsItem } from "@/types/news";
 
 const News = () => {
