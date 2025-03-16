@@ -3,16 +3,18 @@
 import Container from "@/components/global/container";
 import { useClerk } from "@clerk/nextjs";
 import { LoaderCircle } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Logout = () => {
   const { signOut } = useClerk();
 
-  try {
-    signOut({ redirectUrl: "/" });
-  } catch (error) {
-    console.error(error);
-  }
+  useEffect(() => {
+    try {
+      signOut({ redirectUrl: "/" });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [signOut]);
 
   return (
     <Container className="flex justify-center gap-2 py-10">
