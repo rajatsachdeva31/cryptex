@@ -158,22 +158,25 @@ const CoinDetails = () => {
                     />
                     <span className="text-red-500">{error}</span>
                   </div>
-                  <DialogFooter className="flex items-center gap-2">
-                    <p>
-                      Total: $
-                      {String(
-                        quantity
-                          ? (selectedCoin.current_price * quantity).toFixed(2)
-                          : 0
-                      ).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                    </p>
-                    <Button
-                      type="submit"
-                      className="px-6 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200"
-                      onClick={() => handleTrade()}
-                    >
-                      Buy
-                    </Button>
+                  <DialogFooter className="flex items-center justify-between">
+                    <p>Balance: ${user?.balance}</p>
+                    <div className="flex items-center gap-4">
+                      <p>
+                        Total: $
+                        {String(
+                          quantity
+                            ? (selectedCoin.current_price * quantity).toFixed(2)
+                            : 0
+                        ).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                      </p>
+                      <Button
+                        type="submit"
+                        className="px-6 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200"
+                        onClick={() => handleTrade()}
+                      >
+                        Buy
+                      </Button>
+                    </div>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>

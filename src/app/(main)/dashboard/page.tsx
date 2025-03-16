@@ -83,9 +83,9 @@ const Dashboard = () => {
         const coin = listing.find((coin) => coin.id === holding.symbol);
         if (coin) {
           const profit =
-            (coin.current_price - holding.purchasePrice) * holding.quantity;
+            (coin.current_price - holding.purchasePrice);
           const proftPercentage =
-            (profit / holding.purchasePrice) * holding.quantity * 100;
+            (profit / holding.purchasePrice) * 100;
           return {
             symbol: coin.symbol.toUpperCase(),
             profit,

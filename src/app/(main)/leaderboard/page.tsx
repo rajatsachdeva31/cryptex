@@ -8,43 +8,40 @@ import { Coin } from "@/types/coin";
 import React, { useEffect, useState } from "react";
 import LeaderboardCard from "@/components/main/leaderboard/card";
 
-export interface UserWithProfit extends User {
-  totalProfit: number;
+export interface UserWithPortfolio extends User {
+  portfolioValue: number;
 }
 
 const LeaderBoard = () => {
-  const [users, setUsers] = useState<UserWithProfit[]>([]);
+  const [users, setUsers] = useState<UserWithPortfolio[]>([]);
 
   async function fetchUsers() {
     const [userData, coinData] = await Promise.all([
       GetAllUsers(),
       getCoinsList(),
     ]);
-    // setListing(coinData);
 
     if (userData && coinData) {
-      const usersWithProfit = userData.map((user) => {
-        const totalProfit = user.Portfolio.reduce((acc, position) => {
+      const usersWithPortfolio = userData.map((user) => {
+        const portfolioValue = user.Portfolio.reduce((acc, position) => {
           const currentCoin = coinData.find(
             (coin: Coin) => coin.id === position.symbol
           );
           if (!currentCoin) return acc;
 
-          const purchaseValue = position.quantity * position.purchasePrice;
           const currentValue = position.quantity * currentCoin.current_price;
-          const profit = currentValue - purchaseValue;
-          return acc + profit;
+          return acc + currentValue;
         }, 0);
 
         return {
           ...user,
-          totalProfit,
+          portfolioValue,
         };
       });
 
-      // Sort users by total profit in descending order
-      const sortedUsers = usersWithProfit.sort(
-        (a, b) => b.totalProfit - a.totalProfit
+      // Sort users by portfolio value in descending order
+      const sortedUsers = usersWithPortfolio.sort(
+        (a, b) => b.portfolioValue - a.portfolioValue
       );
       setUsers(sortedUsers);
     }
