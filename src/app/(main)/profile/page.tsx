@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserContext } from "@/contexts/UserContext";
+import { UpdateUser } from "@/api/users";
 
 const profileFormSchema = z.object({
   name: z
@@ -26,13 +27,6 @@ const profileFormSchema = z.object({
     })
     .min(3, {
       message: "Name must be at least 3 characters long",
-    }),
-  username: z
-    .string({
-      required_error: "Please enter a username",
-    })
-    .min(2, {
-      message: "Username must be at least 2 characters.",
     }),
   email: z
     .string({
@@ -54,7 +48,6 @@ const Profile = () => {
     mode: "onChange",
     defaultValues: {
       name: "",
-      username: "",
       email: "",
     },
   });
@@ -62,16 +55,33 @@ const Profile = () => {
   useEffect(() => {
     form.reset({
       name: user?.name || "",
-      username: user?.id || "",
       email: user?.email || "",
     });
   }, [form, user]);
 
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: "You submitted the following values:",
-      description: JSON.stringify(data, null, 2),
-    });
+  async function onSubmit(data: ProfileFormValues) {
+    if (!user) return;
+
+    const changedValues = Object.entries(data).reduce((acc, [key, value]) => {
+      const originalValue = user[key as "name" | "email"];
+      if (value !== originalValue) {
+        acc[key as keyof ProfileFormValues] = value;
+      }
+      return acc;
+    }, {} as Partial<ProfileFormValues>);
+
+    if (Object.keys(changedValues).length === 0) {
+      toast({
+        title: "No changes detected",
+        description: "You haven't modified any values.",
+      });
+    } else {
+      await UpdateUser(changedValues);
+      toast({
+        title: "Changed values:",
+        description: JSON.stringify(changedValues, null, 2),
+      });
+    }
   }
 
   return (
@@ -99,22 +109,6 @@ const Profile = () => {
                     <FormDescription>
                       This is your public display name. It will be shown on your
                       public profile.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                name="username"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="john_trader" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display username. It should be unique.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

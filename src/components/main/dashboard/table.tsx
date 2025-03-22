@@ -1,6 +1,5 @@
 "use client";
 
-import { getCoinsList } from "@/api/trade/route";
 import {
   Table,
   TableBody,
@@ -14,19 +13,10 @@ import {
 import { UserContext } from "@/contexts/UserContext";
 import { cn } from "@/lib/utils";
 import { Coin } from "@/types/coin";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
-const PortfolioTable = () => {
+const PortfolioTable = ({ listing }: { listing: Coin[] }) => {
   const { user, isLoaded } = useContext(UserContext);
-  const [listing, setListing] = useState<Coin[]>([]);
-
-  useEffect(() => {
-    const fetchListing = async () => {
-      const data = await getCoinsList();
-      setListing(data);
-    };
-    fetchListing();
-  }, []);
 
   const setProfitLoss = (
     id: string,

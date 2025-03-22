@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
+import { User } from "@/types/user";
 
 export async function GetUserDetails() {
     const user = await currentUser()
@@ -50,5 +51,20 @@ export async function GetAllUsers() {
         include: {
             Portfolio: true,
         }
+    })
+}
+
+export async function UpdateUser(userData: Partial<Pick<User, 'name' | 'email'>>) {
+    const user = await currentUser()
+
+    if (!user || !user.emailAddresses?.length) {
+        return null;
+    }
+
+    return await prisma.user.update({
+        where: {
+            clerkId: user.id,
+        },
+        data: userData
     })
 }

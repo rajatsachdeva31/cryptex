@@ -173,7 +173,7 @@ const Dashboard = () => {
         className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-2"
       >
         <ChartCard />
-        <PortfolioCard />
+        <PortfolioCard listing={listing} />
       </Container>
     </Container>
   );
