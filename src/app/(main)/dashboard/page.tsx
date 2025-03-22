@@ -7,18 +7,17 @@ import {
   PortfolioCard,
   StatsCard,
 } from "@/components/main/dashboard/cards";
-import { Button } from "@/components/ui/button";
 import {
   ChartNoAxesCombined,
   DollarSign,
   LucideHandCoins,
   Wallet,
-  Zap,
 } from "lucide-react";
 import { User } from "@/types/user";
 import { GetUserDetails } from "@/api/users";
 import { getCoinsList } from "@/api/trade/route";
 import { Coin } from "@/types/coin";
+import Upgrade from "@/components/main/upgrade";
 
 const Dashboard = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -82,10 +81,8 @@ const Dashboard = () => {
       const assetsWithProfit = user.Portfolio.map((holding) => {
         const coin = listing.find((coin) => coin.id === holding.symbol);
         if (coin) {
-          const profit =
-            (coin.current_price - holding.purchasePrice);
-          const proftPercentage =
-            (profit / holding.purchasePrice) * 100;
+          const profit = coin.current_price - holding.purchasePrice;
+          const proftPercentage = (profit / holding.purchasePrice) * 100;
           return {
             symbol: coin.symbol.toUpperCase(),
             profit,
@@ -112,12 +109,7 @@ const Dashboard = () => {
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
       <div className="flex justify-between items-center">
         <h1 className="font-medium md:text-xl">Dashboard</h1>
-        {isLoaded && user?.type == "FREE" && (
-          <Button variant={"ghost"} className="flex items-center gap-1">
-            <Zap fill="#facc15" size={20} color="#facc15" />
-            Upgrade
-          </Button>
-        )}
+        {isLoaded && user?.type == "FREE" && <Upgrade />}
       </div>
       <Container
         delay={0.4}

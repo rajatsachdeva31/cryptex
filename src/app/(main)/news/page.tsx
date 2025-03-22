@@ -2,14 +2,13 @@
 
 import React, { Suspense, useContext, useEffect, useState } from "react";
 import Container from "@/components/global/container";
-import { Button } from "@/components/ui/button";
-import { Zap } from "lucide-react";
 import { UserContext } from "@/contexts/UserContext";
 import { fetchNews } from "@/api/news/route";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { Skeleton } from "@/components/ui/skeleton";
 import NewsCard from "@/components/main/news/card";
 import { NewsItem } from "@/types/news";
+import Upgrade from "@/components/main/upgrade";
 
 const News = () => {
   const { user, isLoaded } = useContext(UserContext);
@@ -31,12 +30,7 @@ const News = () => {
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
       <div className="flex justify-between items-center">
         <h1 className="font-medium md:text-xl">News</h1>
-        {isLoaded && user?.type == "FREE" && (
-          <Button variant={"ghost"} className="flex items-center gap-1">
-            <Zap fill="#facc15" size={20} color="#facc15" />
-            Upgrade
-          </Button>
-        )}
+        {isLoaded && user?.type == "FREE" && <Upgrade />}
       </div>
       <div className="flex flex-wrap h-fit relative lg:pb-10">
         {loading &&

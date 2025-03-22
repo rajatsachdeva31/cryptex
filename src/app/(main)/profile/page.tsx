@@ -19,6 +19,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserContext } from "@/contexts/UserContext";
 import { UpdateUser } from "@/api/users";
+import Upgrade from "@/components/main/upgrade";
 
 const profileFormSchema = z.object({
   name: z
@@ -86,7 +87,10 @@ const Profile = () => {
 
   return (
     <Container className="pt-2 h-full flex flex-col gap-4 overflow-y-scroll">
-      <h1 className="font-medium md:text-xl">Profile</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="font-medium md:text-xl">Profile</h1>
+        {isLoaded && user?.type == "FREE" && <Upgrade />}
+      </div>
       <p className="text-muted-foreground">
         This is what others will see about you on the site.
       </p>
