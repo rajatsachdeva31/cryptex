@@ -68,3 +68,20 @@ export async function UpdateUser(userData: Partial<Pick<User, 'name' | 'email'>>
         data: userData
     })
 }
+
+export async function UpdateType() {
+    const user = await currentUser()
+
+    if (!user || !user.emailAddresses?.length) {
+        return null;
+    }
+
+    return await prisma.user.update({
+        where: {
+            clerkId: user.id,
+        },
+        data: {
+            type: 'PRO'
+        }
+    })
+}

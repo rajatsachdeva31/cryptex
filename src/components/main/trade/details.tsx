@@ -86,13 +86,15 @@ const CoinDetails = () => {
       return;
     }
     const total = quantity * selectedCoin.current_price;
-    if (user.balance && total > user.balance) {
+    if (user.type == "FREE" && user.balance && total > user.balance) {
       setError("Insufficient balance.");
       return;
     }
     try {
       await tradeCoin(selectedCoin.id, quantity, selectedCoin.current_price);
-      await UpdateBalance(total);
+      if (user.type == "FREE") {
+        await UpdateBalance(total);
+      }
       toast({
         title: "Trade successful!",
         description: `You have traded ${quantity} ${
@@ -159,7 +161,7 @@ const CoinDetails = () => {
                     <span className="text-red-500">{error}</span>
                   </div>
                   <DialogFooter className="flex items-center justify-between">
-                    <p>Balance: ${user?.balance}</p>
+                    {user?.type == "FREE" && <p>Balance: ${user?.balance}</p>}
                     <div className="flex items-center gap-4">
                       <p>
                         Total: $

@@ -151,13 +151,17 @@ const Dashboard = () => {
           loaded={isLoaded}
           icon={<DollarSign className="text-primary" />}
           title={"Available Balance"}
-          value={`$ ${
-            user?.balance
-              ? user?.balance
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-              : 0
-          }`}
+          value={
+            user?.type == "FREE"
+              ? `$${
+                  user?.balance
+                    ? user?.balance
+                        .toFixed(2)
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                    : "N/A"
+                }`
+              : "Unlimited"
+          }
         />
       </Container>
       <Container

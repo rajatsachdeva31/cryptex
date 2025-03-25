@@ -5,8 +5,6 @@ import { redirect } from "next/navigation";
 const AuthCallback = async () => {
   const user = await currentUser();
 
-  console.log(user);
-
   if (!user?.id) {
     return redirect("/login");
   }

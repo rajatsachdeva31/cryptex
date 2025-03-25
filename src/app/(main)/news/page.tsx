@@ -21,7 +21,6 @@ const News = () => {
       const newsListing = await fetchNews();
       setNews(newsListing.data);
       setLoading(false);
-      console.log(newsListing.data);
     }
     getNews();
   }, []);

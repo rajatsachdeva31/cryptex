@@ -64,7 +64,6 @@ const ListingTable = () => {
 
   const handleCoinSelect = (coin: Coin) => {
     setSelectedCoin(coin);
-    console.log(`Selected coin: ${coin}`);
   };
 
   return (

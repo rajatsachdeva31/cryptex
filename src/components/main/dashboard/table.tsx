@@ -73,8 +73,8 @@ const PortfolioTable = ({ listing }: { listing: Coin[] }) => {
                 <TableCell>
                   $
                   {(
-                    listing.find((coin) => coin.id === holding.symbol)
-                      ?.current_price || 0
+                    (listing.find((coin) => coin.id === holding.symbol)
+                      ?.current_price || 0) * holding.quantity
                   ).toFixed(2)}
                 </TableCell>
                 <TableCell
