@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import PortfolioTable from "./table";
-import PerformanceChart from "./chart";
+import DistributionChart from "./chart";
 import { Coin } from "@/types/coin";
 
 interface StatsCardsProps {
@@ -37,18 +37,18 @@ const StatsCard = ({
   );
 };
 
-const ChartCard = () => {
+const ChartCard = ({ listing }: { listing: Coin[] }) => {
   return (
     <Card
       className={`w-full h-full rounded-lg md:rounded-xl flex flex-col justify-between md:justify-normal shadow-md dark:border-neutral-700`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between gap-2 font-medium md:text-lg lg:text-xl">
-          Performance Chart
+          Distribution Chart
         </CardTitle>
       </CardHeader>
       <CardContent className="h-full">
-        <PerformanceChart />
+        <DistributionChart listing={listing} />
       </CardContent>
     </Card>
   );
@@ -70,4 +70,5 @@ const PortfolioCard = ({ listing }: { listing: Coin[] }) => {
     </Card>
   );
 };
+
 export { StatsCard, ChartCard, PortfolioCard };

@@ -164,7 +164,7 @@ const Dashboard = () => {
         delay={0.6}
         className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-2"
       >
-        <ChartCard />
+        <ChartCard listing={listing} />
         <PortfolioCard listing={listing} />
       </Container>
     </Container>

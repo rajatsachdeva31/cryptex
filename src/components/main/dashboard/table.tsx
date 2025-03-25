@@ -24,7 +24,6 @@ const PortfolioTable = ({ listing }: { listing: Coin[] }) => {
     quantity: number
   ) => {
     const currentCoin = listing.find((coin) => coin.id === id);
-    console.log(id);
     if (currentCoin) {
       const profitLoss = (currentCoin.current_price - purchasePrice) * quantity;
       return profitLoss;
